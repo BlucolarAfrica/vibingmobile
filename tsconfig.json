@@ -30,7 +30,6 @@
     "baseUrl": "./app",
     "paths": {
       "assets": ["./assets"],
-      "base": ["./base"],
       "components": ["./components"],
       "constant": ["./constant"],
       "core": ["./core"],
