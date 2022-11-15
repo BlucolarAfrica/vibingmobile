@@ -30,9 +30,9 @@ export default function LoadApp(): JSX.Element {
     <>
       <NavigationContainer {...{ theme }}>
         <SafeAreaProvider>
-          {isAuthenticated ? <></> : <AuthNavigator />}
+          {isAuthenticated ? null : <AuthNavigator />}
           <StatusBar
-            barStyle="dark-content"
+            barStyle="light-content"
             backgroundColor="transparent"
             translucent
           />
