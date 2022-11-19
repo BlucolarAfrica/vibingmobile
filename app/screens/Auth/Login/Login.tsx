@@ -14,6 +14,7 @@ import {
 } from 'components';
 import { layout, pallets } from 'constant';
 import { AuthRoutes, StackNavigationProps } from 'navigation';
+import { setAuthenticated, useDispatch } from 'store';
 
 const { fonts, spacing } = layout;
 
@@ -22,6 +23,7 @@ export default function Login({
 }: StackNavigationProps<AuthRoutes, 'Login'>): JSX.Element {
   const passwordRef = useRef<TextInput>(null);
   const [showPass, setShowPass] = useState(true);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -40,6 +42,7 @@ export default function Login({
           }}
           onSubmit={values => {
             console.log(values);
+            dispatch(setAuthenticated(true));
           }}>
           <FormField
             icon="sms-outline"
