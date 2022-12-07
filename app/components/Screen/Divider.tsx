@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 
 import { layout } from 'constant';
-const { l, m, s, xl, xxl, t } = layout.spacing;
+const { l, m, s, xl, xxl, t, m4 } = layout.spacing;
 
 interface Props {
-  space?: 't' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+  space?: 't' | 's' | 'm' | 'm4' | 'l' | 'xl' | 'xxl';
   horizontal?: boolean;
 }
 
@@ -30,6 +30,9 @@ export default function Divider({
       break;
     case 'm':
       margin = m;
+      break;
+    case 'm4':
+      margin = m4;
       break;
     case 'l':
       margin = l;

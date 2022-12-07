@@ -14,16 +14,25 @@ import {
 } from 'components';
 import { layout, pallets } from 'constant';
 import { AuthRoutes, StackNavigationProps } from 'navigation';
-import { setAuthenticated, useDispatch } from 'store';
+import { useLoginMutation, useService } from 'service';
+import { loginValidationSchema as validationSchema } from 'utils';
 
 const { fonts, spacing } = layout;
 
 export default function Login({
   navigation,
 }: StackNavigationProps<AuthRoutes, 'Login'>): JSX.Element {
+  const [login, { isLoading, isError, error, isSuccess }] = useLoginMutation();
+
   const passwordRef = useRef<TextInput>(null);
   const [showPass, setShowPass] = useState(true);
-  const dispatch = useDispatch();
+
+  useService({
+    error,
+    isError,
+    isLoading,
+    isSuccess,
+  });
 
   return (
     <>
@@ -34,15 +43,17 @@ export default function Login({
           subtitle="Welcome back to VibingLIVE, it's time to listen to the music you want and enjoy the music!"
         />
         <Form
+          {...{ validationSchema }}
           initialValues={{
-            confirmPassword: '',
             email: '',
             password: '',
-            phoneNumber: '',
           }}
           onSubmit={values => {
             console.log(values);
-            dispatch(setAuthenticated(true));
+            login({
+              ...values,
+              device_name: 'tetris',
+            });
           }}>
           <FormField
             icon="sms-outline"
@@ -77,7 +88,7 @@ export default function Login({
             Forgot password?
           </Text>
           <Divider />
-          <Submit label="Next" />
+          <Submit label="Login" {...{ isLoading }} />
           <Divider />
           <ActionText
             action="Sign up"

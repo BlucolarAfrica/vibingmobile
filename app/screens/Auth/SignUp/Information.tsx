@@ -14,13 +14,29 @@ import {
 } from 'components';
 import { layout } from 'constant';
 import { AuthRoutes, StackNavigationProps } from 'navigation';
+import { useService, useSignUpMutation } from 'service';
+import { nameValidationSchema as validationSchema } from 'utils';
 
 const { fonts, spacing } = layout;
 
-export default function Password({
+export default function Information({
   navigation,
-}: StackNavigationProps<AuthRoutes, 'Password'>): JSX.Element {
-  const lastNumberRef = useRef<TextInput>(null);
+  route,
+}: StackNavigationProps<AuthRoutes, 'Information'>): JSX.Element {
+  const { confirmPassword, email, password, phoneNumber } = route.params;
+  const lastNameRef = useRef<TextInput>(null);
+  const [signUp, { isError, isLoading, isSuccess, error }] =
+    useSignUpMutation();
+
+  useService({
+    error,
+    isError,
+    isLoading,
+    isSuccess,
+    successEffect() {
+      navigation.navigate('VerifyEmail');
+    },
+  });
 
   return (
     <>
@@ -37,13 +53,22 @@ export default function Password({
           Step 2 of 2
         </Text>
         <Form
+          {...{ validationSchema }}
           initialValues={{
             firstName: '',
             lastName: '',
           }}
-          onSubmit={values => {
-            console.log(values);
-            navigation.navigate('VerifyEmail');
+          onSubmit={val => {
+            console.log(val);
+            signUp({
+              device_name: 'Infinix',
+              email,
+              full_name: val.firstName,
+              gender: 'male',
+              password: password,
+              password_confirmation: confirmPassword,
+              phone_number: phoneNumber,
+            });
           }}>
           <FormField
             icon="user2-outline"
@@ -53,9 +78,10 @@ export default function Password({
             autoCorrect={false}
             returnKeyLabel="Next"
             returnKeyType="next"
-            onSubmitEditing={() => lastNumberRef.current?.focus()}
+            onSubmitEditing={() => lastNameRef.current?.focus()}
           />
           <FormField
+            ref={lastNameRef}
             icon="user2-outline"
             name="lastName"
             label="Last Name"
@@ -65,9 +91,13 @@ export default function Password({
             returnKeyType="go"
           />
           <Divider />
-          <Submit label="Next" />
+          <Submit label="Next" {...{ isLoading }} />
           <Divider />
-          <ActionText action="Sign in" question="You have an account" />
+          <ActionText
+            action="Sign in"
+            question="You have an account"
+            onPress={() => navigation.navigate('Login')}
+          />
         </Form>
       </Container>
     </>

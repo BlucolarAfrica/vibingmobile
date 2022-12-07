@@ -98,20 +98,15 @@ const FormPhoneInput = forwardRef<TextInput, Props>(function (
           <View
             style={{
               alignItems: 'center',
-              backgroundColor: `${pallets.red}33`,
-              borderRadius: 5,
-              flex: 1,
               flexDirection: 'row',
-              paddingHorizontal: 10,
-              paddingVertical: 5,
             }}>
             <Icon
               name="info"
-              size={20}
-              style={{ marginRight: 10 }}
+              size={16}
+              style={{ marginRight: 4 }}
               color={pallets.red}
             />
-            <Text size={fonts.subhead} style={{}} color={pallets.red}>
+            <Text size={fonts.footnote} style={{}} color={pallets.red}>
               {errorMessage}
             </Text>
           </View>

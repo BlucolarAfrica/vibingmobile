@@ -15,6 +15,10 @@ export default {
   },
   cards: {
     cardRadius: 0,
+    cardSize: 120,
+    playlistHeight: 120,
+    playlistRadius: 8,
+    playlistWidth: width - 16 * 4,
     trackHeight: 0,
   },
   dimension: {
@@ -48,6 +52,7 @@ export default {
   spacing: {
     l: 24,
     m: 16,
+    m4: 20,
     padding: 16,
     s: 8,
     t: 4,

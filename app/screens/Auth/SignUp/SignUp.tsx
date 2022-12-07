@@ -15,7 +15,7 @@ import {
 } from 'components';
 import { layout } from 'constant';
 import { AuthRoutes, StackNavigationProps } from 'navigation';
-
+import { signUpValidationSchema as validationSchema } from 'utils';
 const { fonts, spacing } = layout;
 
 export default function SignUp({
@@ -42,6 +42,7 @@ export default function SignUp({
           Step 1 of 2
         </Text>
         <Form
+          {...{ validationSchema }}
           initialValues={{
             confirmPassword: '',
             email: '',
@@ -50,7 +51,7 @@ export default function SignUp({
           }}
           onSubmit={values => {
             console.log(values);
-            navigation.navigate('Password');
+            navigation.navigate('Information', { ...values });
           }}>
           <FormField
             icon="sms-outline"

@@ -7,8 +7,8 @@ import { AuthRoutes } from '../types';
 
 import {
   ForgotPassword,
+  Information,
   Login,
-  Password,
   Reset,
   SignUp,
   VerifyEmail,
@@ -37,7 +37,7 @@ export default function AuthNavigator(): JSX.Element {
       </Group>
       <Group>
         <Screen name="SignUp" component={SignUp} />
-        <Screen name="Password" component={Password} />
+        <Screen name="Information" component={Information} />
         <Screen name="VerifyEmail" component={VerifyEmail} />
       </Group>
     </Navigator>

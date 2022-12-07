@@ -76,6 +76,7 @@ type IconName =
   | 'notification-outline'
   | 'password-check'
   | 'profile-circle'
+  | 'profile-circle-outline'
   | 'receipt-search'
   | 'scan'
   | 'search'
@@ -100,3 +101,13 @@ type IconName =
   | 'verify'
   | 'wallet-add'
   | 'warning';
+
+type error =
+  | import('@reduxjs/toolkit/dist/query').FetchBaseQueryError
+  | import('@reduxjs/toolkit').SerializedError
+  | undefined;
+
+interface IError extends error {
+  message?: string;
+  data?: unknown;
+}

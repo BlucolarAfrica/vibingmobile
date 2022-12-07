@@ -4,11 +4,13 @@ import { Divider, Text } from 'components';
 import { useHeaderHeight } from 'hooks';
 import { layout, pallets } from 'constant';
 import { Icon } from 'assets';
+import { useSelector } from 'store';
 
 const { spacing, fonts } = layout;
 
 export default function HomeHeader(): JSX.Element | null {
   const { insets, headerHeight } = useHeaderHeight();
+  const { user } = useSelector(state => state.auth);
 
   return (
     <>
@@ -35,15 +37,25 @@ export default function HomeHeader(): JSX.Element | null {
             Good Morning
           </Text>
           <Divider space="t" />
-          <Text variant="medium">Peter Dury</Text>
+          <Text variant="medium">{user?.full_name || 'User'}</Text>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={[styles.iconBox]}
-          accessibilityLabel="Notification"
-          accessibilityRole="button">
-          <Icon name="notification-outline" size={20} />
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={[styles.iconBox]}
+            accessibilityLabel="Notification"
+            accessibilityRole="button">
+            <Icon name="notification-outline" size={20} />
+          </TouchableOpacity>
+          <Divider horizontal space="s" />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={[styles.iconBox]}
+            accessibilityLabel="Notification"
+            accessibilityRole="button">
+            <Icon name="profile-circle-outline" size={20} />
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
