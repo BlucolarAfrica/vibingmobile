@@ -1,11 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Platform } from 'react-native';
 
+import {
+  HomeNavigator,
+  LibraryNavigator,
+  SearchNavigator,
+} from '../Navigators';
+
 import { TabBar } from './Components';
 
 import { TabRoutes } from 'navigation';
 import { getTabIcon } from 'utils';
-import { Home, Library, Search } from 'screens';
 import { Icon } from 'assets';
 
 const { Screen, Navigator } = createBottomTabNavigator<TabRoutes>();
@@ -23,9 +28,9 @@ export default function Tab(): JSX.Element {
         },
         tabBarStyle: [Platform.OS === 'android' && { height: 60, padding: 10 }],
       })}>
-      <Screen name="Home" component={Home} />
-      <Screen name="Search" component={Search} />
-      <Screen name="Library" component={Library} />
+      <Screen name="Home" component={HomeNavigator} />
+      <Screen name="Search" component={SearchNavigator} />
+      <Screen name="Library" component={LibraryNavigator} />
     </Navigator>
   );
 }

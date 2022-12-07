@@ -92,7 +92,9 @@ function Button({
 
   if (isLoading) {
     buttonStyle.backgroundColor =
-      variant === 'transparent' ? pallets.transparent : pallets.grey;
+      variant === 'transparent'
+        ? pallets.transparent
+        : pallets.backgroundDarker;
   }
 
   const transparentColor = Color || pallets.primary;

@@ -13,11 +13,13 @@ import {
 import reducer from './reducer';
 import { reduxStorage } from './storage';
 
+import { apiMiddleware } from 'service/config';
+
 const persistConfig = {
   key: 'root',
   storage: reduxStorage,
   version: 1,
-  whitelist: ['auth'],
+  whitelist: [''],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -28,7 +30,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(),
+    }).concat(apiMiddleware),
   reducer: persistedReducer,
 });
 

@@ -1,8 +1,15 @@
+interface InformationProps {
+  email: string;
+  phoneNumber: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export type AuthRoutes = {
   Welcome: undefined;
 
   SignUp: undefined;
-  Password: undefined;
+  Information: InformationProps;
   VerifyEmail: undefined;
 
   Login: undefined;
