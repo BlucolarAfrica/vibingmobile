@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "generateAPK": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew assembleDebug && start . && cd .."
   },
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
@@ -21,6 +22,7 @@
     "formik": "^2.2.9",
     "react": "18.1.0",
     "react-native": "0.70.4",
+    "react-native-confirmation-code-field": "^7.3.1",
     "react-native-email-link": "^1.14.3",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.8.0",
