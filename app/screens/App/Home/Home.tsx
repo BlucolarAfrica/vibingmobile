@@ -13,7 +13,7 @@ import {
 } from 'components';
 import { library, playlist, tags } from 'data';
 import { layout, pallets } from 'constant';
-import { AppRoutes, RootNavigationProp, TabRoutes } from 'navigation';
+import { AppRoutes, HomeRoutes, RootNavigationProp } from 'navigation';
 
 const tempImgUrl =
   'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80';
@@ -21,7 +21,7 @@ const { spacing, cards, fonts } = layout;
 
 export default function Home({
   navigation,
-}: RootNavigationProp<AppRoutes, TabRoutes, 'Home'>): JSX.Element {
+}: RootNavigationProp<AppRoutes, HomeRoutes, 'HomePage'>): JSX.Element {
   return (
     <>
       <Header />
@@ -96,7 +96,7 @@ export default function Home({
                   subtitle={item.artist}
                   title={item.title}
                   onPress={
-                    () => navigation.navigate('Home', { screen: 'TrackList' }) //An example to the navigation of tracks screen
+                    () => navigation.navigate('TrackList') //An example to the navigation of tracks screen
                   }
                 />
               );

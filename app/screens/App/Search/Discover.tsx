@@ -3,20 +3,16 @@ import { StyleSheet, View } from 'react-native';
 import { SearchInput } from './Components';
 
 import { Container, Header } from 'components';
-import { AppRoutes, RootNavigationProp, TabRoutes } from 'navigation';
+import { AppRoutes, RootNavigationProp, SearchRoutes } from 'navigation';
 
 export default function Discover({
   navigation,
-}: RootNavigationProp<AppRoutes, TabRoutes, 'Search'>): JSX.Element {
+}: RootNavigationProp<AppRoutes, SearchRoutes, 'Discover'>): JSX.Element {
   return (
     <>
       <Header hideBackIcon />
       <Container>
-        <SearchInput
-          onPress={() =>
-            navigation.navigate('Search', { screen: 'SearchPage' })
-          }
-        />
+        <SearchInput onPress={() => navigation.navigate('SearchPage')} />
         <View style={styles.container} />
       </Container>
     </>
