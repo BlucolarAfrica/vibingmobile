@@ -49,6 +49,9 @@ export default function FormPin({
         caretHidden={false}
         ref={pinRef}
         value={values[name]}
+        onEndEditing={() => {
+          values[name].length === cellCount && handleSubmit();
+        }}
         onSubmitEditing={() => handleSubmit()}
         onChangeText={text => {
           setFieldValue(name, text);

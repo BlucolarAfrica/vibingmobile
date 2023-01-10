@@ -1,5 +1,6 @@
+import { useState } from 'react';
+
 import {
-  ActionText,
   Container,
   Divider,
   Form,
@@ -9,10 +10,30 @@ import {
   Title,
 } from 'components';
 import { AuthRoutes, StackNavigationProps } from 'navigation';
+import { useSendResetOTPMutation, useService } from 'service';
+import { forgotPasswordValidationSchema as validationSchema } from 'utils';
 
 export default function Forgot({
   navigation,
 }: StackNavigationProps<AuthRoutes, 'Forgot'>): JSX.Element {
+  const device_name = 'Samsung';
+  const [mail, setMail] = useState('');
+  const [send, { isError, isLoading, isSuccess, reset, error }] =
+    useSendResetOTPMutation();
+
+  useService({
+    error,
+    isError,
+    isLoading,
+    isSuccess,
+    reset() {
+      reset();
+    },
+    successEffect() {
+      navigation.navigate('VerifyReset', { device_name, email: mail });
+    },
+  });
+
   return (
     <>
       <Header />
@@ -22,15 +43,17 @@ export default function Forgot({
           subtitle="Enter your registered email below to receive password reset link"
         />
         <Form
+          {...{ validationSchema }}
           initialValues={{
-            confirmPassword: '',
             email: '',
-            password: '',
-            phoneNumber: '',
           }}
-          onSubmit={values => {
-            console.log(values);
-            navigation.navigate('Reset');
+          onSubmit={({ email }) => {
+            setMail(email);
+
+            send({
+              device_name,
+              email,
+            });
           }}>
           <FormField
             icon="sms-outline"
@@ -42,16 +65,8 @@ export default function Forgot({
             returnKeyLabel="Next"
             returnKeyType="next"
           />
-          <Divider />
-          <Submit label="Submit" />
-          <Divider />
-          <ActionText
-            action=""
-            question="Back to Login"
-            onPress={() => {
-              navigation.navigate('Login');
-            }}
-          />
+          <Divider space="xl" />
+          <Submit label="Submit" {...{ isLoading }} />
         </Form>
       </Container>
     </>

@@ -1,7 +1,7 @@
 // import { openInbox } from 'react-native-email-link';
 
 import {
-  ActionText,
+  // ActionText,
   Container,
   Divider,
   Form,
@@ -11,12 +11,7 @@ import {
   Title,
 } from 'components';
 import { AuthRoutes, StackNavigationProps } from 'navigation';
-import {
-  useResendEmailOTPMutation,
-  useService,
-  useVerifyEmailMutation,
-} from 'service';
-import { setAuthenticated, useDispatch, useSelector } from 'store';
+import { useService, useVerifyResetOTPMutation } from 'service';
 
 // const openEmail = async () => {
 //   try {
@@ -26,16 +21,15 @@ import { setAuthenticated, useDispatch, useSelector } from 'store';
 //   }
 // };
 
-export default function VerifyEmail({
+export default function VerifyOTP({
   route,
-}: StackNavigationProps<AuthRoutes, 'VerifyEmail'>): JSX.Element {
+  navigation,
+}: StackNavigationProps<AuthRoutes, 'VerifyReset'>): JSX.Element {
   const { device_name, email } = route.params;
-  const { token } = useSelector(state => state.auth);
 
-  const dispatch = useDispatch();
-  const [resend, resendQuery] = useResendEmailOTPMutation();
-  const [verify, { isError, isLoading, isSuccess, error, reset }] =
-    useVerifyEmailMutation();
+  // const [resend, resendQuery] = useResendEmailOTPMutation();
+  const [verify, { isError, isLoading, isSuccess, error, reset, data }] =
+    useVerifyResetOTPMutation();
 
   useService({
     error,
@@ -46,18 +40,21 @@ export default function VerifyEmail({
       reset();
     },
     successEffect() {
-      dispatch(setAuthenticated(true));
+      data &&
+        navigation.navigate('Reset', {
+          device_name,
+          email,
+          session_id: data.data.session_id,
+        });
     },
   });
 
-  useService({
-    error: resendQuery.error,
-    isError: resendQuery.isError,
-    isLoading: resendQuery.isLoading,
-    isSuccess: resendQuery.isSuccess,
-  });
-
-  console.log('Bearer', token);
+  // useService({
+  //   error: resendQuery.error,
+  //   isError: resendQuery.isError,
+  //   isLoading: resendQuery.isLoading,
+  //   isSuccess: resendQuery.isSuccess,
+  // });
 
   return (
     <>
@@ -65,7 +62,7 @@ export default function VerifyEmail({
       <Container>
         <Title
           title="Verify your email"
-          subtitle={`Hi Lade! account verification link has been sent to your email address ${email}`}
+          subtitle={`A verification code has been sent to your email address ${email}`}
         />
         <Form
           initialValues={{ pin: '' }}
@@ -83,7 +80,7 @@ export default function VerifyEmail({
           <Divider space="xxl" />
           <Submit label="Verify" {...{ isLoading }} />
           <Divider />
-          <ActionText
+          {/* <ActionText
             isLoading={resendQuery.isLoading}
             action="Resend"
             question="Didn't receive email"
@@ -93,7 +90,7 @@ export default function VerifyEmail({
 
               resend({ deviceName: device_name });
             }}
-          />
+          /> */}
         </Form>
       </Container>
     </>

@@ -1,15 +1,17 @@
-import { StyleSheet, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function Onboard(): JSX.Element {
+import { OnboardRoutes } from 'navigation';
+import { Onboard } from 'screens/Auth/Onboard';
+
+const { Navigator, Screen } = createStackNavigator<OnboardRoutes>();
+
+export default function OnboardNavigator() {
   return (
-    <View style={styles.container}>
-      <View />
-    </View>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Screen name="Onboard" component={Onboard} />
+    </Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

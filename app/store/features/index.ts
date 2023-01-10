@@ -1,1 +1,1 @@
-export { default as auth, setAuthenticated } from './auth';
+export { default as auth, setAuthenticated, setOnboarded } from './auth';

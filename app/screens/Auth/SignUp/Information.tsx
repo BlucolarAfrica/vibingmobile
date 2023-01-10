@@ -23,6 +23,7 @@ export default function Information({
   navigation,
   route,
 }: StackNavigationProps<AuthRoutes, 'Information'>): JSX.Element {
+  const device_name = 'Samsung';
   const { confirmPassword, email, password, phoneNumber } = route.params;
   const lastNameRef = useRef<TextInput>(null);
   const [signUp, { isError, isLoading, isSuccess, error }] =
@@ -34,7 +35,7 @@ export default function Information({
     isLoading,
     isSuccess,
     successEffect() {
-      navigation.navigate('VerifyEmail');
+      navigation.navigate('VerifyEmail', { device_name, email });
     },
   });
 
@@ -58,13 +59,12 @@ export default function Information({
             firstName: '',
             lastName: '',
           }}
-          onSubmit={val => {
-            console.log(val);
+          onSubmit={({ firstName, lastName }) => {
             signUp({
-              device_name: 'Infinix',
+              device_name,
               email,
-              full_name: val.firstName,
-              gender: 'male',
+              full_name: `${firstName} ${lastName}`,
+              gender: '',
               password: password,
               password_confirmation: confirmPassword,
               phone_number: phoneNumber,

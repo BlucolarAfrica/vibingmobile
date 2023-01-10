@@ -12,6 +12,7 @@ import {
   Reset,
   SignUp,
   VerifyEmail,
+  VerifyReset,
   Welcome,
 } from 'screens/Auth';
 
@@ -20,7 +21,7 @@ const { Group, Navigator, Screen } = createStackNavigator<AuthRoutes>();
 export default function AuthNavigator(): JSX.Element {
   return (
     <Navigator
-      initialRouteName="SignUp"
+      initialRouteName="Login"
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         headerBackTitleVisible: false,
@@ -33,6 +34,7 @@ export default function AuthNavigator(): JSX.Element {
       <Group>
         <Screen name="Login" component={Login} />
         <Screen name="Forgot" component={ForgotPassword} />
+        <Screen name="VerifyReset" component={VerifyReset} />
         <Screen name="Reset" component={Reset} />
       </Group>
       <Group>

@@ -11,6 +11,10 @@ export type TabRoutes = {
   Library: undefined;
 };
 
+export type OnboardRoutes = {
+  Onboard: undefined;
+};
+
 export type HomeRoutes = {
   HomePage: undefined;
   TrackList: undefined;

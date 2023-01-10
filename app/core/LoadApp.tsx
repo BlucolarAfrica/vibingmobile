@@ -5,10 +5,10 @@ import { StatusBar } from 'react-native';
 
 import { pallets } from 'constant';
 import { useSelector } from 'store';
-import { AppNavigator, AuthNavigator } from 'navigation';
+import { AppNavigator, AuthNavigator, OnboardNavigator } from 'navigation';
 
 export default function LoadApp(): JSX.Element {
-  const { isAuthenticated } = useSelector(state => state.auth);
+  const { isAuthenticated, isOnboarded } = useSelector(state => state.auth);
 
   useEffect(() => {
     console.log('LoadApp', { isAuthenticated });
@@ -30,7 +30,13 @@ export default function LoadApp(): JSX.Element {
     <>
       <NavigationContainer {...{ theme }}>
         <SafeAreaProvider>
-          {isAuthenticated ? <AppNavigator /> : <AuthNavigator />}
+          {isAuthenticated ? (
+            <AppNavigator />
+          ) : isOnboarded ? (
+            <AuthNavigator />
+          ) : (
+            <OnboardNavigator />
+          )}
           <StatusBar
             barStyle="light-content"
             backgroundColor="transparent"

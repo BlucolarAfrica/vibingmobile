@@ -16,6 +16,7 @@ interface Props {
   errorEffect?: () => void;
   successEffect?: () => void;
   onAlertPress?: () => void;
+  reset?: () => void;
 }
 
 export default function useService({
@@ -27,6 +28,7 @@ export default function useService({
   errorTitle,
   successMsg,
   successEffect,
+  reset,
   onAlertPress,
   errorEffect,
 }: Props) {
@@ -72,6 +74,7 @@ export default function useService({
 
     return () => {
       ignore = true;
+      reset?.();
     };
   }, [
     isLoading,
@@ -83,6 +86,7 @@ export default function useService({
     isPrivate,
     error,
     errorTitle,
+    reset,
     onAlertPress,
   ]);
 }

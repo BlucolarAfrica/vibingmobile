@@ -51,3 +51,12 @@ export const nameValidationSchema = Yup.object().shape({
   firstName,
   lastName,
 });
+
+export const forgotPasswordValidationSchema = Yup.object().shape({
+  email,
+});
+
+export const resetPasswordValidationSchema = Yup.object().shape({
+  confirmPassword,
+  password,
+});

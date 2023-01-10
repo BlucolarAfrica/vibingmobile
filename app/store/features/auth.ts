@@ -4,12 +4,22 @@ import { authEndpoints } from 'service';
 
 const initialState: AuthState = {
   isAuthenticated: false,
+  isOnboarded: true,
   token: null,
   user: null,
 };
 
 const { actions, reducer } = createSlice({
   extraReducers: builder => {
+    builder.addMatcher(
+      authEndpoints.signUp.matchFulfilled,
+      (state, { payload }) => {
+        console.log('USER Registered', payload.data);
+
+        state.user = payload.data.user;
+        state.token = payload.data.token;
+      },
+    );
     builder.addMatcher(
       authEndpoints.login.matchFulfilled,
       (state, { payload }) => {
@@ -27,9 +37,12 @@ const { actions, reducer } = createSlice({
     setAuthenticated: (state: AuthState, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
+    setOnboarded: state => {
+      state.isOnboarded = true;
+    },
   },
 });
 
-export const { setAuthenticated } = actions;
+export const { setAuthenticated, setOnboarded } = actions;
 
 export default reducer;

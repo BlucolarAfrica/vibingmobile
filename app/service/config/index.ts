@@ -13,7 +13,7 @@ const api = createApi({
     },
   }),
   endpoints: builder => ({
-    getToken: builder.query<void, void>({
+    dummyAPI: builder.query<void, void>({
       query: () => ({
         method: 'GET',
         url: '',
@@ -29,5 +29,4 @@ export const {
   middleware: apiMiddleware,
   injectEndpoints,
   endpoints,
-  useGetTokenQuery,
 } = api;

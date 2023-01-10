@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Text } from '../General';
 
@@ -8,6 +8,7 @@ interface ActionTextProps {
   onPress?: () => void;
   question: string;
   action: string;
+  isLoading?: boolean;
 }
 
 const { fonts } = layout;
@@ -16,18 +17,24 @@ export default function ActionText({
   action,
   question,
   onPress,
+  isLoading,
 }: ActionTextProps): JSX.Element | null {
   return (
     <TouchableOpacity
+      disabled={isLoading}
       activeOpacity={0.7}
       {...{ onPress }}
       style={styles.container}>
-      <Text variant="bold" size={fonts.subhead}>
-        {question}?{' '}
-        <Text variant="bold" size={fonts.subhead} color={pallets.primary}>
-          {action}
+      {isLoading ? (
+        <ActivityIndicator size="small" color={pallets.primary} />
+      ) : (
+        <Text variant="bold" size={fonts.subhead}>
+          {question}?{' '}
+          <Text variant="bold" size={fonts.subhead} color={pallets.primary}>
+            {action}
+          </Text>
         </Text>
-      </Text>
+      )}
     </TouchableOpacity>
   );
 }
