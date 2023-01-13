@@ -15,8 +15,8 @@ import { library, playlist, tags } from 'data';
 import { layout, pallets } from 'constant';
 import { AppRoutes, HomeRoutes, RootNavigationProp } from 'navigation';
 
-const tempImgUrl =
-  'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80';
+// const tempImgUrl =
+//   'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80';
 const { spacing, cards, fonts } = layout;
 
 export default function Home({
@@ -44,7 +44,7 @@ export default function Home({
                     styles.playlistBox,
                     { marginRight: spacing.padding },
                   ]}>
-                  <Image source={{ uri: tempImgUrl }} style={styles.image} />
+                  <Image source={{ uri: item.url }} style={styles.image} />
                   <View style={styles.playlist}>
                     <View style={styles.textBox}>
                       <Text variant="bold" size={fonts.subhead}>

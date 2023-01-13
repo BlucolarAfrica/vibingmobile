@@ -16,6 +16,7 @@ interface Props {
   hideBackIcon?: boolean;
   label?: string;
   iconColor?: string;
+  right?: JSX.Element;
 }
 
 export default function Header({

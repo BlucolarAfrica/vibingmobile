@@ -5,6 +5,8 @@ export const pallets = {
   black: '#0B0B0B',
   border: '#FFFFFF33',
   card: '#0B121A33',
+  copper: '#D67E58',
+  corn: '#FFF275',
   darkGrey: '#999999',
   font: '#FFFFFF',
   fontDisabled: '#9196A033',
@@ -17,8 +19,11 @@ export const pallets = {
   inputDisabled: '#2B364960',
   lightGrey: '#FFFDFD',
   primary: '#FF3D00',
+  purple: '#C3AEEC',
   red: '#E01A4F', //#F58
+  ruby: '#93032E',
   transparent: 'transparent',
+  turquoise: '#2CD1CC',
   white: '#FFFFFF',
   yellow: '#FCAA67',
 };

@@ -16,6 +16,7 @@ export default {
   cards: {
     cardRadius: 0,
     cardSize: 120,
+    genreHeight: 90,
     playlistHeight: 120,
     playlistRadius: 8,
     playlistWidth: width - 16 * 4,

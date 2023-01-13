@@ -1,3 +1,5 @@
+import { pallets } from 'constant';
+
 interface LibraryProps {
   album: string;
   artist: string;
@@ -16,6 +18,12 @@ interface PlaylistProps {
 
 interface TagProps {
   id: string;
+  name: string;
+}
+
+interface MyLibraryProps {
+  icon: IconName;
+  color: string;
   name: string;
 }
 
@@ -129,6 +137,53 @@ export const playlist: PlaylistProps[] = [
   },
 ];
 
+export const discovery: PlaylistProps[] = [
+  {
+    name: 'Made for you',
+    url: 'https://source.unsplash.com/mBVDi_cmkOg',
+  },
+  {
+    name: 'Trending',
+    url: 'https://source.unsplash.com/fEVaiLwWvlU',
+  },
+  {
+    name: 'Pop',
+    url: 'https://source.unsplash.com/bXjqPckmLD8',
+  },
+  {
+    name: 'Dance',
+    url: 'https://source.unsplash.com/YrtFlrLo2DQ',
+  },
+  {
+    name: 'Jazz',
+    url: 'https://source.unsplash.com/5gn2soeAc40',
+  },
+  {
+    name: 'Acoustic',
+    url: 'https://source.unsplash.com/fCEJGBzAkrU',
+  },
+  {
+    name: 'Gospel',
+    url: 'https://source.unsplash.com/xihYs03jvYo',
+  },
+  {
+    name: 'Party',
+    url: 'https://source.unsplash.com/NcdG9mK3PBY',
+  },
+  {
+    name: 'Classic',
+    url: 'https://source.unsplash.com/hU9gx8YfVK4',
+  },
+  {
+    name: 'Independent',
+    url: 'https://source.unsplash.com/Y20JJ_ddy9M',
+  },
+  {
+    name: 'Live',
+    url: 'https://source.unsplash.com/ZhQCZjr9fHo',
+  },
+];
+
 export const tags: TagProps[] = [
   {
     id: '1',
@@ -153,5 +208,33 @@ export const tags: TagProps[] = [
   {
     id: '6',
     name: 'Reggae',
+  },
+];
+
+export const librarySection: MyLibraryProps[] = [
+  {
+    color: pallets.ruby,
+    icon: 'folder-favorite-outline',
+    name: 'Favorite Albums',
+  },
+  {
+    color: pallets.turquoise,
+    icon: 'music-outline',
+    name: 'Favorite Songs',
+  },
+  {
+    color: pallets.copper,
+    icon: 'import-outline',
+    name: 'Downloads',
+  },
+  {
+    color: pallets.purple,
+    icon: 'music-playlist',
+    name: 'My Playlists',
+  },
+  {
+    color: pallets.corn,
+    icon: 'add',
+    name: 'Add',
   },
 ];
