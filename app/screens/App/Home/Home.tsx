@@ -11,12 +11,10 @@ import {
   TrackCard,
   VirtualScroll,
 } from 'components';
-import { library, playlist, tags } from 'data';
+import { albums, playlist, tags } from 'data';
 import { layout, pallets } from 'constant';
 import { AppRoutes, HomeRoutes, RootNavigationProp } from 'navigation';
 
-// const tempImgUrl =
-//   'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80';
 const { spacing, cards, fonts } = layout;
 
 export default function Home({
@@ -78,7 +76,7 @@ export default function Home({
           <SectionTitle title="DJ Mix" />
           <Divider />
           <FlatList
-            data={library}
+            data={albums}
             decelerationRate="fast"
             snapToInterval={cards.cardSize + spacing.padding}
             keyExtractor={(_, i) => i.toString()}
@@ -87,16 +85,16 @@ export default function Home({
             ListHeaderComponent={<View style={{ width: spacing.padding }} />}
             ListFooterComponent={<View style={{ width: spacing.padding }} />} //comment out
             renderItem={({ item, index }) => {
-              const last = index === library.length - 1;
+              const last = index === albums.length - 1;
 
               return (
                 <TrackCard
                   marginRight={last ? 0 : spacing.padding}
                   imgUrl={item.artwork}
                   subtitle={item.artist}
-                  title={item.title}
+                  title={item.album}
                   onPress={
-                    () => navigation.navigate('TrackList') //An example to the navigation of tracks screen
+                    () => navigation.navigate('TrackList', { album: item }) //An example to the navigation of tracks screen
                   }
                 />
               );
@@ -106,7 +104,7 @@ export default function Home({
           <SectionTitle title="Gospel Vibes" />
           <Divider />
           <FlatList
-            data={library}
+            data={albums}
             decelerationRate="fast"
             snapToInterval={cards.cardSize + spacing.padding}
             keyExtractor={(_, i) => i.toString()}
@@ -115,18 +113,21 @@ export default function Home({
             ListHeaderComponent={<View style={{ width: spacing.padding }} />}
             ListFooterComponent={<View style={{ width: spacing.padding }} />} //comment out
             renderItem={({ item, index }) => {
-              const last = index === library.length - 1;
+              const last = index === albums.length - 1;
 
               return (
                 <TrackCard
                   onPress={
                     () =>
-                      navigation.navigate('Playing', { screen: 'NowPlaying' }) //An example of a navigation to the now playing screen
+                      navigation.navigate('Playing', {
+                        params: { ...item },
+                        screen: 'NowPlaying',
+                      }) //An example of a navigation to the now playing screen
                   }
                   marginRight={last ? 0 : spacing.padding}
                   imgUrl={item.artwork}
                   subtitle={item.artist}
-                  title={item.title}
+                  title={item.album}
                 />
               );
             }}
@@ -135,7 +136,7 @@ export default function Home({
           <SectionTitle title="Afro Beats" />
           <Divider />
           <FlatList
-            data={library}
+            data={albums}
             decelerationRate="fast"
             snapToInterval={cards.cardSize + spacing.padding}
             keyExtractor={(_, i) => i.toString()}
@@ -144,14 +145,14 @@ export default function Home({
             ListHeaderComponent={<View style={{ width: spacing.padding }} />}
             ListFooterComponent={<View style={{ width: spacing.padding }} />} //comment out
             renderItem={({ item, index }) => {
-              const last = index === library.length - 1;
+              const last = index === albums.length - 1;
 
               return (
                 <TrackCard
                   marginRight={last ? 0 : spacing.padding}
                   imgUrl={item.artwork}
                   subtitle={item.artist}
-                  title={item.title}
+                  title={item.album}
                 />
               );
             }}

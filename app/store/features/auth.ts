@@ -4,7 +4,7 @@ import { authEndpoints } from 'service';
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  isOnboarded: true,
+  isOnboarded: false,
   token: null,
   user: null,
 };

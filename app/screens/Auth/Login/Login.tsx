@@ -45,8 +45,8 @@ export default function Login({
         <Form
           {...{ validationSchema }}
           initialValues={{
-            email: '',
-            password: '',
+            email: __DEV__ ? 'Tetris@gmail.com' : '',
+            password: __DEV__ ? '@Qwerty15' : '',
           }}
           onSubmit={values => {
             console.log(values);

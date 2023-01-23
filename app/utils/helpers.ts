@@ -1,6 +1,7 @@
 import { RouteProp } from '@react-navigation/native';
 import type { ErrorResponse } from 'api-response';
 
+import { AlbumProps } from 'data';
 import { TabRoutes } from 'navigation';
 
 type TabIcon = Extract<
@@ -29,6 +30,99 @@ export const getTabIcon = (
     default:
       return 'home';
   }
+};
+
+export const getArtist = (artist: string | string[]): string => {
+  switch (typeof artist) {
+    case 'string':
+      return artist;
+    case 'object':
+      if (Array.isArray(artist)) {
+        return artist.join(', ');
+      } else {
+        return '';
+      }
+    default:
+      return '';
+  }
+};
+
+export const convertToHoursAndMinutes = (seconds: number): string => {
+  if (isNaN(seconds) || seconds < 0) {
+    return '00 hr 00 min';
+  }
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  if (hours === 0 && minutes === 0) {
+    return `${seconds} sec`;
+  } else if (hours === 0) {
+    return `${minutes}min`;
+  } else {
+    return `${hours}hr ${minutes}min`;
+  }
+};
+
+export const checkAlbumType = (duration: number): string => {
+  if (isNaN(duration) || duration < 0) {
+    return 'Invalid input, please enter a positive number';
+  }
+  if (duration <= 900) {
+    return 'Single';
+  } else if (duration > 900 && duration <= 2400) {
+    return 'EP';
+  } else {
+    return 'Album';
+  }
+};
+
+export const getTotalDuration = (albums: AlbumProps['tracks']): number => {
+  return albums.reduce((total, album) => total + album.duration, 0);
+};
+
+export const convertToMinutesAndSeconds = (seconds: number): string => {
+  if (isNaN(seconds) || seconds < 0) {
+    return '00:00';
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+};
+
+export const formatDate = (date: string): string => {
+  if (!String(date)) {
+    return '';
+  }
+  const dateObject = new Date(date);
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const month = months[dateObject.getUTCMonth()];
+  const day = dateObject.getUTCDate();
+  const year = dateObject.getUTCFullYear();
+  const daySuffix = ['st', 'nd', 'rd'][(day - 1) % 10] || 'th';
+  return `${day}${daySuffix} ${month}, ${year}`;
+};
+
+export const formatNumber = (num: number): string => {
+  if (isNaN(num)) {
+    return '0';
+  }
+
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export const handleError = (error: IError) => {

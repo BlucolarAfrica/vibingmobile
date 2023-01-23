@@ -10,7 +10,7 @@ import {
   TrackCard,
   VirtualScroll,
 } from 'components';
-import { library, librarySection } from 'data';
+import { albums, librarySection } from 'data';
 import { Icon } from 'assets';
 import { layout, pallets } from 'constant';
 
@@ -21,6 +21,9 @@ const MARGIN = (window.width - spacing.padding * 2) * 0.05;
 
 console.log(SIZE, MARGIN);
 // console.log(window.width - spacing.padding * 2);
+
+//Size of the card totals window width - padding * 2 / 3
+//I might need to revisit this component to make sure that the spacing works
 
 export default function Library(): JSX.Element {
   return (
@@ -63,7 +66,7 @@ export default function Library(): JSX.Element {
         <SectionTitle title="Top Mixes" hideRightText />
         <Divider />
         <FlatList
-          data={library}
+          data={albums}
           decelerationRate="fast"
           snapToInterval={cards.cardSize + spacing.padding}
           keyExtractor={(_, i) => i.toString()}
@@ -72,14 +75,14 @@ export default function Library(): JSX.Element {
           ListHeaderComponent={<View style={{ width: spacing.padding }} />}
           ListFooterComponent={<View style={{ width: spacing.padding }} />} //comment out
           renderItem={({ item, index }) => {
-            const last = index === library.length - 1;
+            const last = index === albums.length - 1;
 
             return (
               <TrackCard
                 marginRight={last ? 0 : spacing.padding}
                 imgUrl={item.artwork}
                 subtitle={item.artist}
-                title={item.title}
+                title={item.album}
               />
             );
           }}

@@ -16,6 +16,7 @@ interface Props {
   hideBackIcon?: boolean;
   label?: string;
   iconColor?: string;
+  icon?: IconName;
   right?: JSX.Element;
 }
 
@@ -24,6 +25,7 @@ export default function Header({
   hideBackIcon,
   backgroundColor = pallets.background,
   iconColor,
+  icon,
   label,
 }: Props): JSX.Element | null {
   const { insets, headerHeight } = useHeaderHeight();
@@ -54,7 +56,9 @@ export default function Header({
               color={iconColor}
               size={18}
               name={
-                Platform.OS === 'ios'
+                icon
+                  ? icon
+                  : Platform.OS === 'ios'
                   ? 'chevron-left-outline'
                   : 'arrow-left-outline'
               }

@@ -1,5 +1,7 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 
+import { AlbumProps } from 'data';
+
 export type AppRoutes = {
   Tab: NavigatorScreenParams<TabRoutes>;
   Playing: NavigatorScreenParams<NowPayingRoutes>;
@@ -17,7 +19,7 @@ export type OnboardRoutes = {
 
 export type HomeRoutes = {
   HomePage: undefined;
-  TrackList: undefined;
+  TrackList: { album: AlbumProps };
   ArtistPage: undefined;
 };
 
@@ -36,5 +38,5 @@ export type LibraryRoutes = {
 };
 
 export type NowPayingRoutes = {
-  NowPlaying: undefined;
+  NowPlaying: AlbumProps;
 };
