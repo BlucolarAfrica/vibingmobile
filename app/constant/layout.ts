@@ -45,6 +45,9 @@ export default {
     title2: xSmall ? 20 : small ? 22 : 24,
     title3: xSmall ? 18 : small ? 20 : 22,
   },
+  image: {
+    avatarSize: 80,
+  },
   input: {
     height: 50,
     inputBottom: 16,

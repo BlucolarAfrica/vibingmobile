@@ -8,7 +8,15 @@ import { useSelector } from 'store';
 
 const { spacing, fonts } = layout;
 
-export default function HomeHeader(): JSX.Element | null {
+interface Props {
+  onProfilePress?: () => void;
+  onNotificationPress?: () => void;
+}
+
+export default function HomeHeader({
+  onNotificationPress,
+  onProfilePress,
+}: Props): JSX.Element | null {
   const { insets, headerHeight } = useHeaderHeight();
   const { user } = useSelector(state => state.auth);
 
@@ -41,6 +49,7 @@ export default function HomeHeader(): JSX.Element | null {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
+            onPress={onNotificationPress}
             activeOpacity={0.8}
             style={[styles.iconBox]}
             accessibilityLabel="Notification"
@@ -49,6 +58,7 @@ export default function HomeHeader(): JSX.Element | null {
           </TouchableOpacity>
           <Divider horizontal space="s" />
           <TouchableOpacity
+            onPress={onProfilePress}
             activeOpacity={0.8}
             style={[styles.iconBox]}
             accessibilityLabel="Notification"

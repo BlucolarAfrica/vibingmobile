@@ -3,12 +3,12 @@ import { FlatList, Image, StyleSheet, View } from 'react-native';
 import { Header } from './Components';
 
 import {
+  AlbumCard,
   Container,
   Divider,
   SectionTitle,
   Tag,
   Text,
-  TrackCard,
   VirtualScroll,
 } from 'components';
 import { albums, playlist, tags } from 'data';
@@ -22,7 +22,14 @@ export default function Home({
 }: RootNavigationProp<AppRoutes, HomeRoutes, 'HomePage'>): JSX.Element {
   return (
     <>
-      <Header />
+      <Header
+        onProfilePress={() => {
+          navigation.navigate('Tab', {
+            params: { screen: 'Profile' },
+            screen: 'Library',
+          });
+        }}
+      />
       <VirtualScroll>
         <Container padding={0}>
           <Divider />
@@ -88,7 +95,7 @@ export default function Home({
               const last = index === albums.length - 1;
 
               return (
-                <TrackCard
+                <AlbumCard
                   marginRight={last ? 0 : spacing.padding}
                   imgUrl={item.artwork}
                   subtitle={item.artist}
@@ -116,7 +123,7 @@ export default function Home({
               const last = index === albums.length - 1;
 
               return (
-                <TrackCard
+                <AlbumCard
                   onPress={
                     () =>
                       navigation.navigate('Playing', {
@@ -148,7 +155,7 @@ export default function Home({
               const last = index === albums.length - 1;
 
               return (
-                <TrackCard
+                <AlbumCard
                   marginRight={last ? 0 : spacing.padding}
                   imgUrl={item.artwork}
                   subtitle={item.artist}

@@ -10,7 +10,7 @@ export type AppRoutes = {
 export type TabRoutes = {
   Home: NavigatorScreenParams<HomeRoutes>;
   Search: NavigatorScreenParams<SearchRoutes>;
-  Library: undefined;
+  Library: NavigatorScreenParams<LibraryRoutes>;
 };
 
 export type OnboardRoutes = {

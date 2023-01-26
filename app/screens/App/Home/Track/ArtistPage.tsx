@@ -1,11 +1,25 @@
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { layout, pallets } from 'constant';
 import { Icon } from 'assets';
-import { Divider, Text, VirtualScroll } from 'components';
+import {
+  AlbumCard,
+  Divider,
+  SectionTitle,
+  Text,
+  TrackCard,
+  VirtualScroll,
+} from 'components';
 import { formatNumber } from 'utils';
+import { albums } from 'data';
 
-const { window, fonts, spacing } = layout;
+const { window, fonts, spacing, cards } = layout;
 
 const HEADER_HEIGHT = window.height * 0.4;
 const BUTTON_HEIGHT = 44;
@@ -35,14 +49,62 @@ export default function ArtistPage(): JSX.Element {
             {formatNumber(2983435)} Monthly Listeners
           </Text>
           <Divider />
-          <TouchableOpacity style={styles.button}>
-            <Text variant="bold" size={fonts.subhead}>
-              Follow
-            </Text>
-          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={styles.button}>
+          <Text variant="bold" size={fonts.subhead}>
+            Follow
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={[{ padding: spacing.padding, paddingTop: BUTTON_HEIGHT / 2 }]}>
+        <Divider space="xl" />
+        <View>
+          <Text variant="bold" size={fonts.title3 - 2}>
+            Popular
+          </Text>
+          <Divider space="xl" />
+          <FlatList
+            data={albums[0]?.tracks.slice(0, 4)}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+            renderItem={({ item, index }) => {
+              return (
+                <TrackCard
+                  active={false}
+                  duration={item.duration}
+                  title={item.title}
+                  trackNumber={index + 1}
+                  variant="album"
+                />
+              );
+            }}
+          />
         </View>
       </View>
-      <View style={styles.container} />
+      <SectionTitle title="Albums" hideRightText />
+      <Divider />
+      <FlatList
+        data={albums}
+        decelerationRate="fast"
+        snapToInterval={cards.cardSize + spacing.padding}
+        keyExtractor={(_, i) => i.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={<View style={{ width: spacing.padding }} />}
+        ListFooterComponent={<View style={{ width: spacing.padding }} />} //comment out
+        renderItem={({ item, index }) => {
+          const last = index === albums.length - 1;
+
+          return (
+            <AlbumCard
+              marginRight={last ? 0 : spacing.padding}
+              imgUrl={item.artwork}
+              subtitle={item.artist}
+              title={item.album}
+            />
+          );
+        }}
+      />
     </VirtualScroll>
   );
 }
@@ -57,9 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: -BUTTON_HEIGHT / 2,
     width: window.width * 0.4,
-  },
-  container: {
-    flex: 1,
+    zIndex: 2,
   },
   coverImage: {
     ...StyleSheet.absoluteFillObject,
@@ -72,6 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: pallets.backgroundDarker,
     height: HEADER_HEIGHT,
     justifyContent: 'flex-end',
+    overflow: 'visible',
     paddingHorizontal: spacing.padding,
     zIndex: 2,
   },
@@ -79,6 +140,13 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: pallets.black,
     opacity: 0.5,
+  },
+  separator: {
+    alignSelf: 'center',
+    backgroundColor: pallets.border,
+    height: 1,
+    opacity: 0.1,
+    width: '100%',
   },
   underlay: {
     ...StyleSheet.absoluteFillObject,

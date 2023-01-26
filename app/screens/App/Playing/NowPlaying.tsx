@@ -30,6 +30,8 @@ export default function NowPlaying({
               <View
                 style={{
                   alignSelf: 'center',
+                  flex: 1,
+                  justifyContent: 'space-around',
                   width: SIZE,
                 }}>
                 <View style={styles.cover}>
@@ -41,45 +43,52 @@ export default function NowPlaying({
                     }}
                   />
                 </View>
-                <Divider space="xl" />
-                <View style={styles.row}>
-                  <View style={{ flex: 0.8 }}>
-                    <Text variant="bold" size={fonts.title3} numberOfLines={1}>
-                      {item.title}
-                    </Text>
-                    <Divider space="s" />
-                    <Text numberOfLines={1}>{getArtist(item.artist)}</Text>
-                  </View>
-                  <Icon name="heart-outline" size={20} />
-                </View>
-                <Divider space="xl" />
-                <View>
-                  <View>
-                    <View
-                      style={{
-                        backgroundColor: pallets.darkGrey,
-                        borderRadius: 1,
-                        height: 2,
-                        width: '100%',
-                      }}
-                    />
-                    <Divider space="s" />
-                    <View style={[styles.row]}>
-                      <Text variant="light" size={fonts.subhead}>
-                        {convertToMinutesAndSeconds(0)}
-                      </Text>
-                      <Text variant="light" size={fonts.subhead}>
-                        {convertToMinutesAndSeconds(item.duration)}
-                      </Text>
-                    </View>
-                  </View>
-                  <Divider />
+                <View
+                  style={{
+                    flex: 0.5,
+                  }}>
                   <View style={styles.row}>
-                    <Icon name="shuffle" size={28} />
-                    <Icon name="previous" size={28} />
-                    <Icon name="pause" size={36} />
-                    <Icon name="next" size={28} />
-                    <Icon name="repeat" size={28} />
+                    <View style={{ flex: 0.8 }}>
+                      <Text
+                        variant="bold"
+                        size={fonts.title3}
+                        numberOfLines={1}>
+                        {item.title}
+                      </Text>
+                      <Divider space="s" />
+                      <Text numberOfLines={1}>{getArtist(item.artist)}</Text>
+                    </View>
+                    <Icon name="heart-outline" size={20} />
+                  </View>
+                  <Divider space="xl" />
+                  <View>
+                    <View>
+                      <View
+                        style={{
+                          backgroundColor: pallets.darkGrey,
+                          borderRadius: 1,
+                          height: 2,
+                          width: '100%',
+                        }}
+                      />
+                      <Divider space="s" />
+                      <View style={[styles.row]}>
+                        <Text variant="light" size={fonts.subhead}>
+                          {convertToMinutesAndSeconds(0)}
+                        </Text>
+                        <Text variant="light" size={fonts.subhead}>
+                          {convertToMinutesAndSeconds(item.duration)}
+                        </Text>
+                      </View>
+                    </View>
+                    <Divider />
+                    <View style={styles.row}>
+                      <Icon name="shuffle" size={28} />
+                      <Icon name="previous" size={28} />
+                      <Icon name="pause" size={36} />
+                      <Icon name="next" size={28} />
+                      <Icon name="repeat" size={28} />
+                    </View>
                   </View>
                 </View>
               </View>

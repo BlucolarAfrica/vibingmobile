@@ -1,13 +1,13 @@
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import {
+  AlbumCard,
   Container,
   Divider,
   Header,
   SectionTitle,
   Text,
   Title,
-  TrackCard,
   VirtualScroll,
 } from 'components';
 import { albums, librarySection } from 'data';
@@ -78,7 +78,7 @@ export default function Library(): JSX.Element {
             const last = index === albums.length - 1;
 
             return (
-              <TrackCard
+              <AlbumCard
                 marginRight={last ? 0 : spacing.padding}
                 imgUrl={item.artwork}
                 subtitle={item.artist}
